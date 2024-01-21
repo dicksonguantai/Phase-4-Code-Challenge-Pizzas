@@ -1,0 +1,33 @@
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import MetaData
+from sqlalchemy_serializer import SerializerMixin
+
+metadata = MetaData(naming_convention={
+    "fk":"fk_%(table_name)s_%(referred_table_name)s",
+})
+db = SQLAlchemy(metadata=metadata)
+
+class Restaurant(db.Model, SerializerMixin):
+    __tablename__ = 'restaurants'
+    id = db.Column(db.Integer , primary_key= True)
+    name = db.Column(db.String(30),unique = True, nullable = False)
+    address = db.Column(db.String(150))
+
+
+
+class Pizza(db.Model,SerializerMixin):
+    __tablename__ = 'pizzas'
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(30),nullable = False)
+    ingredients = db.Column(db.String(150))
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+class RestaurantPizza(db.Model, SerializerMixin):
+    __tablename__ = 'restaurant_pizzas'
+    id = db.Column(db.Integer, primary_key = True)
+    price =db.Column(db.Float, nullable = False)
+    restaurant_id = db.Column(db.Integer,db.ForeignKey('restaurants.id'))
+    pizza_id = db.Column(db.Integer,db.ForeignKey('pizzas.id'))
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())    
