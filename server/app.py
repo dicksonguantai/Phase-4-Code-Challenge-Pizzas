@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///restaurant.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-migrate = Migrate(app)
+migrate = Migrate(app,db)
 db.init_app(app)
 
 class Index(Resource):
