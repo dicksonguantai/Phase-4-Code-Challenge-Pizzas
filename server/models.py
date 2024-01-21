@@ -12,7 +12,7 @@ class Restaurant(db.Model, SerializerMixin):
     id = db.Column(db.Integer , primary_key= True)
     name = db.Column(db.String(30),unique = True, nullable = False)
     address = db.Column(db.String(150))
-
+    pizzas = db.relationship("Pizza", secondary = "restaurant_pizzas",back_populates = "restaurants")
 
 
 class Pizza(db.Model,SerializerMixin):
@@ -22,6 +22,7 @@ class Pizza(db.Model,SerializerMixin):
     ingredients = db.Column(db.String(150))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+    restaurants = db.relationship("Restaurant", secondary = "restaurant_pizzas", back_populates = "pizzas")
 
 class RestaurantPizza(db.Model, SerializerMixin):
     __tablename__ = 'restaurant_pizzas'
