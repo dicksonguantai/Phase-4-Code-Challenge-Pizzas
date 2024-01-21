@@ -107,8 +107,8 @@ class RestaurantPizzaRelationship(Resource):
         data = request.get_json()
         restpiz = RestaurantPizza(
             price = data["price"],
-            pizza_id =data["pizza_id"]
-            restaurant_id = data["restaurant_id"]
+            pizza_id =data["pizza_id"],
+            restaurant_id = data["restaurant_id"],
         )
         db.session.add(restpiz)
         db.session.commit()
