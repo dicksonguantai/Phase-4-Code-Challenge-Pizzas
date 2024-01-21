@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from flask_migrate import Migrate
-from flask import jsonify,request
+from flask import jsonify,request,make_response
 from flask_restful import Resource
 from models import db,Pizza,Restaurant,RestaurantPizza
 
@@ -33,7 +33,8 @@ class PizzaResource(Resource):
             }
             for pizza in all_pizzas
         ]
-        return jsonify(pizzas_list),200
+        # response = make_response(jsonify(pizzas_list),200)
+        return make_response(jsonify(pizzas_list),200)
     
 api.add_resource(PizzaResource, '/pizzas')
 
@@ -48,12 +49,13 @@ class RestaurantResource(Resource):
             }
             for restaurant in restaurants
         ]
-        return jsonify(restaurants_list),200
+        response = make_response(jsonify(restaurants_list),200)
+        return response
     
 api.add_resource(RestaurantResource, '/restaurants')
 
 class RestaurantById(Resource):
-    def get(self):
+    def get(self,id):
         restaurant_found = Restaurant.query.filter_by(id=id).first()
         if restaurant_found:
             pizzas_destructure = [{
@@ -70,9 +72,10 @@ class RestaurantById(Resource):
                 "address": restaurant_found.address,
                 "pizzas":pizzas_destructure
             }]
-            return jsonify(restaurant),200
+            response = make_response(jsonify(restaurant),200)
+            return response
         else:
-            return jsonify({"error":"Entered Restaurant is not available"})
+            return make_response(jsonify({"error":"Entered Restaurant is not available"}),404)
 
 
     def delete(self,id):
@@ -81,9 +84,10 @@ class RestaurantById(Resource):
             RestaurantPizza.query.filter_by(restaurant_id= id).delete()
             db.session.delete(restaurant)
             db.session.commit()
-            return "Restaurant deleted!!!!" , 204
+
+            return "Restaurant deleted!!!!" 
         else:
-            return jsonify({"error": "Cannot Delete non-existent restaurant"}),404
+            return make_response(jsonify({"error": "Cannot Delete non-existent restaurant"}),404)
         
 
 api.add_resource(RestaurantById, '/restaurants/<int:id>')
@@ -100,7 +104,8 @@ class RestaurantPizzaRelationship(Resource):
             }
             for restpiz in restaurants_pizzas
         ]
-        return jsonify(restaurants_pizzas_list),200
+        response  = make_response(jsonify(restaurants_pizzas_list),200)
+        return response
     
     def post(self):
         
@@ -113,7 +118,7 @@ class RestaurantPizzaRelationship(Resource):
         db.session.add(restpiz)
         db.session.commit()
 
-        pizza_posted = Pizza.query.filter_by(id=data["pizza"]).first()
+        pizza_posted = Pizza.query.filter_by(id=data["pizza_id"]).first()
         pizza_posted_to_show=[
             {
                 "id": pizza_posted.id,
@@ -122,7 +127,8 @@ class RestaurantPizzaRelationship(Resource):
 
             }
         ]
-        return jsonify(pizza_posted_to_show),200
+        response  = make_response(jsonify(pizza_posted_to_show),200)
+        return response
 
 api.add_resource(RestaurantPizzaRelationship, '/restaurant_pizzas')
 
