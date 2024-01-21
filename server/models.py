@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.orm import validates
 
 metadata = MetaData(naming_convention={
     "fk":"fk_%(table_name)s_%(referred_table_name)s",
@@ -32,3 +33,10 @@ class RestaurantPizza(db.Model, SerializerMixin):
     pizza_id = db.Column(db.Integer,db.ForeignKey('pizzas.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())    
+
+    @validates()
+    def validates_price(self,key,price):
+        if isinstance(price, int) and (price >= 1 and price <=30):
+            return price 
+        else:
+            raise ValueError("The Price can only be between 1 to 30")
