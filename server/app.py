@@ -36,7 +36,7 @@ class PizzaResource(Resource):
             for pizza in all_pizzas
         ]
         response = make_response(jsonify(pizzas_list),200)
-        return make_response(jsonify(pizzas_list),200)
+        return response
     
 api.add_resource(PizzaResource, '/pizzas')
 
