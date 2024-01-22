@@ -35,7 +35,7 @@ const RestaurantPizzaForm = ({ onSuccess }) => {
     e.preventDefault();
 
     try {
-      await axios.post('http://your-flask-api-url/restaurant_pizzas', {
+      await axios.post('/restaurant_pizzas', {
         price,
         restaurant_id: restaurantId,
         pizza_id: pizzaId,
