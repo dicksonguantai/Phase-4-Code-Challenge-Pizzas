@@ -33,7 +33,7 @@ class PizzaResource(Resource):
             }
             for pizza in all_pizzas
         ]
-        # response = make_response(jsonify(pizzas_list),200)
+        response = make_response(jsonify(pizzas_list),200)
         return make_response(jsonify(pizzas_list),200)
     
 api.add_resource(PizzaResource, '/pizzas')
@@ -66,13 +66,12 @@ class RestaurantById(Resource):
             }
             for pizza in restaurant_found.pizzas
             ]
-            restaurant = [{
-                "id":restaurant_found.id,
+            response = make_response({
+                "id": restaurant_found.id,
                 "name": restaurant_found.name,
                 "address": restaurant_found.address,
-                "pizzas":pizzas_destructure
-            }]
-            response = make_response(jsonify(restaurant),200)
+                "pizzas": pizzas_destructure
+            }, 200)
             return response
         else:
             return make_response(jsonify({"error":"Entered Restaurant is not available"}),404)
@@ -100,7 +99,9 @@ class RestaurantPizzaRelationship(Resource):
         restaurants_pizzas_list = [
             {
                 "id":restpiz.id,
-                "price":restpiz.price
+                "price":restpiz.price,
+                "restaurant_id": restpiz.restaurant_id,
+                "pizza_id":restpiz.pizza_id
             }
             for restpiz in restaurants_pizzas
         ]
