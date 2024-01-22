@@ -30,6 +30,10 @@ const RestaurantList = () => {
           </li>
         ))}
       </ul>
+            <Link to="/restaurants_pizzas">Restaurant Pizzas</Link>{' '}<br></br>
+            <Link to="/pizzas">Pizzas</Link>{' '}<br></br>
+            <Link to="/restaurant_pizzas">Adding Pizzas to A Restaurant</Link>{' '}
+            
     </div>
   );
 };
