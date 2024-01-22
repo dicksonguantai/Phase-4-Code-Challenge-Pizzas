@@ -8,7 +8,7 @@ const RestaurantDelete = ({ restaurantId, onDelete }) => {
   const{id} = useParams()
   const handleDelete = async () => {
     try {
-      await axios.delete(`/restaurants/${id}`);
+      await axios.delete(`https://pizza-serve.onrender.com/restaurants/${id}`);
       alert('Restaurant deleted')
       navigate('/restaurants')
     } catch (error) {

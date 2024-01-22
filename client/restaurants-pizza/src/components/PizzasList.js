@@ -7,7 +7,7 @@ const PizzasList = () => {
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
-        const response = await axios.get('/pizzas');
+        const response = await axios.get('https://pizza-serve.onrender.com/pizzas');
         setPizzas(response.data);
       } catch (error) {
         console.error('Error fetching pizzas:', error);

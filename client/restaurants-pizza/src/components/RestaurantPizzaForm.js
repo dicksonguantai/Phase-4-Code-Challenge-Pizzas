@@ -11,7 +11,7 @@ const RestaurantPizzaForm = ({ onSuccess }) => {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const response = await axios.get('/restaurants');
+        const response = await axios.get('https://pizza-serve.onrender.com/restaurants');
         setRestaurants(response.data);
       } catch (error) {
         console.error('Error fetching restaurants:', error);
@@ -20,7 +20,7 @@ const RestaurantPizzaForm = ({ onSuccess }) => {
 
     const fetchPizzas = async () => {
       try {
-        const response = await axios.get('/pizzas');
+        const response = await axios.get('https://pizza-serve.onrender.com/pizzas');
         setPizzas(response.data);
       } catch (error) {
         console.error('Error fetching pizzas:', error);
@@ -35,7 +35,7 @@ const RestaurantPizzaForm = ({ onSuccess }) => {
     e.preventDefault();
 
     try {
-      await axios.post('/restaurant_pizzas', {
+      await axios.post('https://pizza-serve.onrender.com/restaurant_pizzas', {
         price,
         restaurant_id: restaurantId,
         pizza_id: pizzaId,

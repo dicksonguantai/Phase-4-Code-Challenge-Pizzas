@@ -9,7 +9,7 @@ const RestaurantDetail = () => {
   useEffect(() => {
     const fetchRestaurantDetails = async () => {
       try {
-        const response = await fetch(`/restaurants/${id}`);
+        const response = await fetch(`https://pizza-serve.onrender.com/restaurants/${id}`);
         const data = await response.json();
         setRestaurant(data);
       } catch (error) {

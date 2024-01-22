@@ -6,7 +6,7 @@ const RestaurantPizzas = () => {
   useEffect(() => {
     const fetchRestaurantPizzas = async () => {
       try {
-        const response = await fetch('/restaurant_pizzas');
+        const response = await fetch('https://pizza-serve.onrender.com/restaurant_pizzas');
         const data = await response.json();
         setRestaurantPizzas(data);
         console.log(restaurantPizzas)
