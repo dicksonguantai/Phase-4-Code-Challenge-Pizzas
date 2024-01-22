@@ -16,7 +16,7 @@ const RestaurantPizzas = () => {
     };
 
     fetchRestaurantPizzas();
-  }, []);
+  }, [restaurantPizzas]);
 
     return (
     <div>
