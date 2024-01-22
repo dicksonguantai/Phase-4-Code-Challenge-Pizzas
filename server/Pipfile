@@ -12,7 +12,7 @@ flask-migrate = "*"
 gunicorn = "*"
 flask-restful = "*"
 sqlalchemy = "*"
-
+flask_cors = "*"
 [dev-packages]
 
 [requires]
