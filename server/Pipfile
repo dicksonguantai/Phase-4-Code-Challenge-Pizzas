@@ -11,6 +11,7 @@ sqlalchemy-serializer = "*"
 flask-migrate = "*"
 gunicorn = "*"
 flask-restful = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
