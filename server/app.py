@@ -4,9 +4,11 @@ from flask_migrate import Migrate
 from flask import jsonify,request,make_response
 from flask_restful import Resource
 from models import db,Pizza,Restaurant,RestaurantPizza
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 
 app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///restaurant.db'
