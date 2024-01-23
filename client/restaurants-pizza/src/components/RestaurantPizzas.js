@@ -26,8 +26,8 @@ const RestaurantPizzas = () => {
           <li key={restaurantPizza.id}>
             <strong>ID:</strong> {restaurantPizza.id}, 
             <strong> Price:</strong> ${restaurantPizza.price}
-            <strong> Restaurant:</strong> ${restaurantPizza.restaurant_id}
-            <strong> Pizza:</strong> ${restaurantPizza.pizza_id}
+            <strong> Restaurant_id:</strong> {restaurantPizza.restaurant_id}
+            <strong> Pizza_id:</strong> {restaurantPizza.pizza_id}
 
 
           </li>
